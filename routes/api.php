@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\StudentController;
+use Illuminate\Auth\Events\Login;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +24,9 @@ Route::prefix('/students')->group(function () {
     Route::post('', [StudentController::class, 'create']);
     Route::middleware('validate.id')->delete('/{id}', [StudentController::class, 'delete']);
     Route::middleware('validate.id')->patch('/{id}', [StudentController::class, 'modify']); 
-}); 
+});
+
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'withoutLogin']);
+Route::middleware('user.logged.in')->get('/me', [LoginController::class, 'whoAmI']);
+Route::middleware('user.logged.in')->post('/logout', [LoginController::class, 'logout']);
