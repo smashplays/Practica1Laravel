@@ -27,6 +27,6 @@ Route::prefix('/students')->group(function () {
 });
 
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/login', [LoginController::class, 'withoutLogin']);
+Route::get('/no-login', [LoginController::class, 'withoutLogin']);
 Route::middleware('user.logged.in')->get('/me', [LoginController::class, 'whoAmI']);
-Route::middleware('user.logged.in')->post('/logout', [LoginController::class, 'logout']);
+Route::middleware('user.logged.in')->get('/logout', [LoginController::class, 'logout']);
