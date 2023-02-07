@@ -17,7 +17,7 @@ class UserLoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('sanctum')->check()) {
+        if (!Auth::guard('api')->check()) {
             $response = [
                 'success' => false,
                 'message' => "No user is logged in, you cannot access this page.",

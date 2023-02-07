@@ -27,6 +27,7 @@ Route::prefix('/students')->group(function () {
 });
 
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/sign-up', [LoginController::class, 'signUp']);
 Route::get('/no-login', [LoginController::class, 'withoutLogin']);
-Route::middleware('user.logged.in')->get('/me', [LoginController::class, 'whoAmI']);
-Route::middleware('user.logged.in')->get('/logout', [LoginController::class, 'logout']);
+Route::middleware('auth:api')->get('/me', [LoginController::class, 'whoAmI']);
+Route::middleware('auth:api')->get('/logout', [LoginController::class, 'logout']);
